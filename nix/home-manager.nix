@@ -1,6 +1,21 @@
 {config, lib, ...}: let
   cfg = config.programs.ai-guardrails;
   generated = ../generated;
+  externalSkillsDir = generated + "/external-skills";
+  externalSkillNames =
+    if builtins.pathExists externalSkillsDir
+    then builtins.attrNames (builtins.readDir externalSkillsDir)
+    else [];
+  externalSkillFiles = builtins.listToAttrs (lib.concatMap (name: [
+    {
+      name = ".agents/skills/external-${name}";
+      value.source = externalSkillsDir + "/${name}";
+    }
+    {
+      name = ".claude/skills/external-${name}";
+      value.source = externalSkillsDir + "/${name}";
+    }
+  ]) externalSkillNames);
 in {
   options.programs.ai-guardrails.enable = lib.mkEnableOption
     "declarative AI coding guardrails";
@@ -20,6 +35,6 @@ in {
         generated + "/github-copilot/ai-guardrails.instructions.md";
       ".cursor/rules/ai-guardrails.mdc".source = generated + "/cursor/ai-guardrails.mdc";
       ".gemini/GEMINI.md".source = generated + "/gemini/GEMINI.md";
-    };
+    } // externalSkillFiles;
   };
 }

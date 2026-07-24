@@ -23,6 +23,11 @@ in a committed dotfiles flake.
 See `docs/dotfiles-integration.md` for the migration sequence and `nix/home-manager.nix`
 for the managed paths and collision behavior.
 
+## External content
+
+External skills are vendored as reviewed, adapted prose rather than installed from upstream.
+See `docs/external-content.md` for the addition, update, and removal procedure.
+
 ## Development
 
 ```sh

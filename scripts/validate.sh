@@ -4,6 +4,7 @@ set -eu
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 
 "$root/scripts/generate.sh" --check
+"$root/scripts/validate-external.sh" "$root/source/external"
 
 for phrase in \
     "Ask for confirmation before irreversible" \
@@ -17,4 +18,3 @@ for review in code-quality testing security dependencies architecture performanc
     test -f "$root/source/reviews/$review.md"
     test -f "$root/generated/claude-code/skills/$review/SKILL.md"
 done
-

@@ -9,4 +9,4 @@ validate:
 test:
 	./scripts/generate.sh --check
 	./scripts/validate.sh
-
+	./tests/test-external-validation.sh

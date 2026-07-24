@@ -6,6 +6,8 @@ source_dir="$root/source"
 output_dir="$root/generated"
 check=false
 
+"$root/scripts/validate-external.sh" "$source_dir/external"
+
 if [ "${1:-}" = "--check" ]; then
     check=true
 fi
@@ -54,6 +56,21 @@ for review in "$source_dir"/reviews/*.md; do
     } > "$work_dir/claude-code/skills/$name/SKILL.md"
 done
 
+for external_dir in "$source_dir"/external/*; do
+    [ -d "$external_dir" ] || continue
+    name=$(basename "$external_dir")
+    mkdir -p "$work_dir/external-skills/$name"
+    {
+        printf '%s\n' '---'
+        printf 'name: external-%s\n' "$name"
+        printf 'description: Reviewed external skill content managed by ai-guardrails.\n'
+        printf '%s\n\n' '---'
+        cat "$source_dir/baseline/BASELINE.md"
+        printf '\n'
+        cat "$external_dir/CONTENT.md"
+    } > "$work_dir/external-skills/$name/SKILL.md"
+done
+
 if "$check"; then
     diff -ru "$output_dir" "$work_dir"
 else
@@ -61,4 +78,3 @@ else
     mv "$work_dir" "$output_dir"
     trap - EXIT HUP INT TERM
 fi
-
