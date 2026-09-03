@@ -27,6 +27,7 @@ in {
       ".claude/skills/review-code-quality".source = generated + "/claude-code/skills/code-quality";
       ".claude/skills/review-dependencies".source = generated + "/claude-code/skills/dependencies";
       ".claude/skills/review-documentation".source = generated + "/claude-code/skills/documentation";
+      ".claude/skills/review-layering".source = generated + "/claude-code/skills/layering";
       ".claude/skills/review-performance".source = generated + "/claude-code/skills/performance";
       ".claude/skills/review-security".source = generated + "/claude-code/skills/security";
       ".claude/skills/review-testing".source = generated + "/claude-code/skills/testing";

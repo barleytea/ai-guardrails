@@ -1,5 +1,5 @@
 ---
-name: code-quality
+name: layering
 ---
 
 # AI Guardrails
@@ -41,12 +41,10 @@ When more than one review runs in the same pass, group the combined output by re
 type instead of interleaving findings.
 
 
-# review-code-quality
+# review-layering
 
-Review changed code for correctness regressions, error handling, data-flow mistakes, and
-maintainability defects that can cause incorrect behavior. Also flag naming, control flow,
-or abstractions that mislead a reader about what the code actually does, and duplication or
-coupling that measurably raises the cost of the next change. Cite the file and line, explain
-the failing scenario, and propose a concrete fix. Do not report formatting or style
-preferences.
-
+Review whether each responsibility sits in the layer that owns it: business rules leaking
+into controllers or ORM models, persistence or transport detail reaching domain code,
+invariants enforced outside their aggregate, and dependencies pointing outward. Report only
+misplacements with a concrete correctness, maintenance, or testability cost, and name the
+layer that should hold the logic.

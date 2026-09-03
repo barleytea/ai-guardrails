@@ -14,7 +14,7 @@ for phrase in \
     grep -Fq "$phrase" "$root/source/baseline/BASELINE.md"
 done
 
-for review in code-quality testing security dependencies architecture performance documentation; do
+for review in code-quality testing security dependencies architecture layering performance documentation; do
     test -f "$root/source/reviews/$review.md"
     test -f "$root/generated/claude-code/skills/$review/SKILL.md"
 done

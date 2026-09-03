@@ -17,23 +17,28 @@
 
 ## Reviews
 
-When explicitly asked to review, use the named review below. Report only important,
-reproducible findings with evidence. Do not report style-only preferences.
+When asked to review without naming a specific review, run every review listed below and
+return one consolidated report grouped by review type. When one or more specific reviews
+are named, run only those. Report only important, reproducible findings with evidence. Do
+not report style-only preferences.
 
 - `review-code-quality`
 - `review-testing`
 - `review-security`
 - `review-dependencies`
 - `review-architecture`
+- `review-layering`
 - `review-performance`
 - `review-documentation`
 
 
 # Review skills
 
-Run the requested review against the change set. Findings must include severity, file and
-line evidence, impact, and an actionable remedy. If no issue is found, say what was
-reviewed and that no qualifying finding was identified.
+Run each applicable review independently against the change set. Findings must include
+severity, file and line evidence, impact, and an actionable remedy. If no issue is found
+for a review, say what was reviewed and that no qualifying finding was identified for it.
+When more than one review runs in the same pass, group the combined output by review
+type instead of interleaving findings.
 
 
 
@@ -47,8 +52,11 @@ personal style.
 # review-code-quality
 
 Review changed code for correctness regressions, error handling, data-flow mistakes, and
-maintainability defects that can cause incorrect behavior. Cite the file and line, explain
-the failing scenario, and propose a concrete fix.
+maintainability defects that can cause incorrect behavior. Also flag naming, control flow,
+or abstractions that mislead a reader about what the code actually does, and duplication or
+coupling that measurably raises the cost of the next change. Cite the file and line, explain
+the failing scenario, and propose a concrete fix. Do not report formatting or style
+preferences.
 
 
 # review-dependencies
@@ -64,6 +72,14 @@ Review documentation changed with behavior, commands, configuration, or public i
 Report only documentation omissions or contradictions that would cause a user to fail or
 misuse the system.
 
+
+# review-layering
+
+Review whether each responsibility sits in the layer that owns it: business rules leaking
+into controllers or ORM models, persistence or transport detail reaching domain code,
+invariants enforced outside their aggregate, and dependencies pointing outward. Report only
+misplacements with a concrete correctness, maintenance, or testability cost, and name the
+layer that should hold the logic.
 
 # review-performance
 

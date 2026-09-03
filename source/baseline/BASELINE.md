@@ -13,14 +13,17 @@
 
 ## Reviews
 
-When explicitly asked to review, use the named review below. Report only important,
-reproducible findings with evidence. Do not report style-only preferences.
+When asked to review without naming a specific review, run every review listed below and
+return one consolidated report grouped by review type. When one or more specific reviews
+are named, run only those. Report only important, reproducible findings with evidence. Do
+not report style-only preferences.
 
 - `review-code-quality`
 - `review-testing`
 - `review-security`
 - `review-dependencies`
 - `review-architecture`
+- `review-layering`
 - `review-performance`
 - `review-documentation`
 

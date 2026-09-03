@@ -17,23 +17,28 @@ name: dependencies
 
 ## Reviews
 
-When explicitly asked to review, use the named review below. Report only important,
-reproducible findings with evidence. Do not report style-only preferences.
+When asked to review without naming a specific review, run every review listed below and
+return one consolidated report grouped by review type. When one or more specific reviews
+are named, run only those. Report only important, reproducible findings with evidence. Do
+not report style-only preferences.
 
 - `review-code-quality`
 - `review-testing`
 - `review-security`
 - `review-dependencies`
 - `review-architecture`
+- `review-layering`
 - `review-performance`
 - `review-documentation`
 
 
 # Review skills
 
-Run the requested review against the change set. Findings must include severity, file and
-line evidence, impact, and an actionable remedy. If no issue is found, say what was
-reviewed and that no qualifying finding was identified.
+Run each applicable review independently against the change set. Findings must include
+severity, file and line evidence, impact, and an actionable remedy. If no issue is found
+for a review, say what was reviewed and that no qualifying finding was identified for it.
+When more than one review runs in the same pass, group the combined output by review
+type instead of interleaving findings.
 
 
 # review-dependencies
