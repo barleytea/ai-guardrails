@@ -34,10 +34,24 @@ The module owns these paths:
 - `~/.cursor/rules/ai-guardrails.mdc`
 - `~/.gemini/GEMINI.md`
 
-Before enabling it, remove the legacy activation links for Claude and Gemini from
-`dotfiles/modules/home/claude/default.nix` and
+Before enabling it with the default `installInstructionFiles = true`, remove the legacy
+activation links for Claude and Gemini from `dotfiles/modules/home/claude/default.nix` and
 `dotfiles/modules/home/gemini/default.nix` in the same commit. Keep runtime settings,
 secret setup, hooks, status lines, packages, and editor settings in `dotfiles`.
+
+If the dotfiles already manage `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`,
+`~/.cursor/rules/ai-guardrails.mdc`,
+`~/.config/vscode/instructions/ai-guardrails.instructions.md`, and `~/.gemini/GEMINI.md`
+themselves, set `installInstructionFiles = false` instead; in that case the module owns
+only `~/.claude/skills/review-*` and the external skill paths, and the legacy activation
+links do not need to be removed:
+
+```nix
+programs.ai-guardrails = {
+  enable = true;
+  installInstructionFiles = false;
+};
+```
 
 Home Manager refuses unmanaged-file collisions by default. Resolve or back up any existing
 managed target intentionally; the module never silently overwrites it.
