@@ -17,12 +17,18 @@
     }
   ]) externalSkillNames);
 in {
-  options.programs.ai-guardrails.enable = lib.mkEnableOption
-    "declarative AI coding guardrails";
+  options.programs.ai-guardrails = {
+    enable = lib.mkEnableOption "declarative AI coding guardrails";
+
+    installInstructionFiles = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Install the generated instruction files (~/.claude/CLAUDE.md, ~/.codex/AGENTS.md, ~/.cursor/rules/ai-guardrails.mdc, ~/.config/vscode/instructions/ai-guardrails.instructions.md, ~/.gemini/GEMINI.md). Set to false when the consuming dotfiles already manage richer instruction files at those paths and only want the review-* and external skills.";
+    };
+  };
 
   config = lib.mkIf cfg.enable {
     home.file = {
-      ".claude/CLAUDE.md".source = generated + "/claude-code/CLAUDE.md";
       ".claude/skills/review-architecture".source = generated + "/claude-code/skills/architecture";
       ".claude/skills/review-code-quality".source = generated + "/claude-code/skills/code-quality";
       ".claude/skills/review-dependencies".source = generated + "/claude-code/skills/dependencies";
@@ -31,11 +37,13 @@ in {
       ".claude/skills/review-performance".source = generated + "/claude-code/skills/performance";
       ".claude/skills/review-security".source = generated + "/claude-code/skills/security";
       ".claude/skills/review-testing".source = generated + "/claude-code/skills/testing";
+    } // externalSkillFiles // lib.optionalAttrs cfg.installInstructionFiles {
+      ".claude/CLAUDE.md".source = generated + "/claude-code/CLAUDE.md";
       ".codex/AGENTS.md".source = generated + "/codex/AGENTS.md";
       ".config/vscode/instructions/ai-guardrails.instructions.md".source =
         generated + "/github-copilot/ai-guardrails.instructions.md";
       ".cursor/rules/ai-guardrails.mdc".source = generated + "/cursor/ai-guardrails.mdc";
       ".gemini/GEMINI.md".source = generated + "/gemini/GEMINI.md";
-    } // externalSkillFiles;
+    };
   };
 }

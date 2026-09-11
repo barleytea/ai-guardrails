@@ -15,6 +15,19 @@ After publishing this repository, add it as a flake input, import
 programs.ai-guardrails.enable = true;
 ```
 
+If the consuming dotfiles already manage richer instruction files at
+`~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.cursor/rules/ai-guardrails.mdc`,
+`~/.config/vscode/instructions/ai-guardrails.instructions.md`, and `~/.gemini/GEMINI.md`,
+disable installation of the generated instruction files and keep only the
+`~/.claude/skills/review-*` and external skills:
+
+```nix
+programs.ai-guardrails = {
+  enable = true;
+  installInstructionFiles = false;
+};
+```
+
 For a private GitHub repository, the dotfiles CI must have read access to this input
 (for example, through a dedicated read-only deploy key or token). Commit the input lock
 update together with the dotfiles integration. Do not use a machine-local absolute path
