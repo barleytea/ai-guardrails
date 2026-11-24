@@ -18,8 +18,8 @@ programs.ai-guardrails.enable = true;
 If the consuming dotfiles already manage richer instruction files at
 `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`, `~/.cursor/rules/ai-guardrails.mdc`,
 `~/.config/vscode/instructions/ai-guardrails.instructions.md`, and `~/.gemini/GEMINI.md`,
-disable installation of the generated instruction files and keep only the
-`~/.claude/skills/review-*` and external skills:
+disable installation of the generated instruction files while keeping the review and
+external skills:
 
 ```nix
 programs.ai-guardrails = {

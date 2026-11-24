@@ -29,7 +29,7 @@ dotfiles CI with read-only access before enabling the input.
 The module owns these paths:
 
 - `~/.claude/CLAUDE.md` and `~/.claude/skills/review-*`
-- `~/.codex/AGENTS.md`
+- `~/.codex/AGENTS.md` and `~/.agents/skills/review-ui-design`
 - `~/.config/vscode/instructions/ai-guardrails.instructions.md`
 - `~/.cursor/rules/ai-guardrails.mdc`
 - `~/.gemini/GEMINI.md`
@@ -43,7 +43,7 @@ If the dotfiles already manage `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md`,
 `~/.cursor/rules/ai-guardrails.mdc`,
 `~/.config/vscode/instructions/ai-guardrails.instructions.md`, and `~/.gemini/GEMINI.md`
 themselves, set `installInstructionFiles = false` instead; in that case the module owns
-only `~/.claude/skills/review-*` and the external skill paths, and the legacy activation
+the review and external skill paths listed above, and the legacy activation
 links do not need to be removed:
 
 ```nix

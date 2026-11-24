@@ -37,6 +37,8 @@ in {
       ".claude/skills/review-performance".source = generated + "/claude-code/skills/performance";
       ".claude/skills/review-security".source = generated + "/claude-code/skills/security";
       ".claude/skills/review-testing".source = generated + "/claude-code/skills/testing";
+      ".claude/skills/review-ui-design".source = generated + "/claude-code/skills/ui-design";
+      ".agents/skills/review-ui-design".source = generated + "/claude-code/skills/ui-design";
     } // externalSkillFiles // lib.optionalAttrs cfg.installInstructionFiles {
       ".claude/CLAUDE.md".source = generated + "/claude-code/CLAUDE.md";
       ".codex/AGENTS.md".source = generated + "/codex/AGENTS.md";
