@@ -46,7 +46,12 @@ for review in "$source_dir"/reviews/*.md; do
     mkdir -p "$work_dir/claude-code/skills/$name"
     {
         printf '%s\n' '---'
-        printf 'name: %s\n' "$name"
+        if [ "$name" = "ui-design" ]; then
+            printf 'name: review-ui-design\n'
+            printf 'description: Review UI proposals, mockups, UI diffs, and implemented screens for concrete usability, visual design, and accessibility issues. Use for design reviews and user-facing UI changes.\n'
+        else
+            printf 'name: %s\n' "$name"
+        fi
         printf '%s\n\n' '---'
         cat "$source_dir/baseline/BASELINE.md"
         printf '\n'
